@@ -61,6 +61,13 @@ void setup() {
   }
   oled.display();  
 
+  //   oled.clearDisplay();
+  // oled.setTextColor(WHITE);
+  // oled.setTextSize(2);
+  // oled.setCursor(0, 0);	
+  // oled.print("FASE 3"); 
+  // oled.display(); 
+
 }
  
 void loop() {
