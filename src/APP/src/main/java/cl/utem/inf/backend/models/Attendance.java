@@ -21,27 +21,37 @@ public class Attendance {
     private Long id;
 
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
+    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime updatedAt;
 
-    @Column(name = "sala_id", nullable = false)
-    private Integer salaId;
+    @Column(name = "room_id", nullable = false)
+    private Integer roomId;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Integer usuarioId;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
-    @Column(name = "geolocalizacion", nullable = false)
-    private String geolocalizacion;
+    @Column(name = "geolocation_address")
+    private String geolocationAddress;
 
-    @Column(name = "longitud", nullable = false)
-    private Double longitud;
+    @Column(name = "longitude")
+    private Double longitude;
 
-    @Column(name = "latitud", nullable = false)
-    private Double latitud;
+    @Column(name = "latitude")
+    private Double latitude;
+
+    // Constructor vacío (requerido por JPA)
+    public Attendance() {
+    }
+
+    // Constructor
+    public Attendance(Integer roomId, Integer userId) {
+        this.roomId = roomId;
+        this.userId = userId;
+    }
 
     public Long getId() {
         return id;
@@ -63,44 +73,44 @@ public class Attendance {
         this.updatedAt = updatedAt;
     }
 
-    public Integer getSalaId() {
-        return salaId;
+    public Integer getRoomId() {
+        return roomId;
     }
 
-    public void setSalaId(Integer salaId) {
-        this.salaId = salaId;
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
-    public Integer getUsuarioId() {
-        return usuarioId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getGeolocalizacion() {
-        return geolocalizacion;
+    public String getGeoLocationAddress() {
+        return geolocationAddress;
     }
 
-    public void setGeolocalizacion(String geolocalizacion) {
-        this.geolocalizacion = geolocalizacion;
+    public void setGeoLocationAddress(String geolocationAddress) {
+        this.geolocationAddress = geolocationAddress;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public Double getLatitud() {
-        return latitud;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }
 

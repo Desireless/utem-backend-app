@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "users")
 public class User {
     
     @Id
@@ -28,18 +28,20 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    private String correo;
+    @Column(name = "email", nullable = false)
+    private String email;
 
-    private String rol;
+    @Column(name = "role_name", nullable = false)
+    private String roleName;
 
     // Constructor vacío (requerido por JPA)
     public User() {
     }
 
     // Constructor
-    public User( String correo, String rol) {
-        this.correo = correo;
-        this.rol = rol;
+    public User(String email, String roleName) {
+        this.email = email;
+        this.roleName = roleName;
     }
 
     // Getters y setters
@@ -59,20 +61,16 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
+    public String getRoleName() {
+        return roleName;
     }
     
 }
