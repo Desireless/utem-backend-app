@@ -1,8 +1,9 @@
-package cl.utem.inf.backend.controllers;
+package cl.utem.inf.backend.controllers.v1;
 
+import cl.utem.inf.backend.models.Attendance;
+import cl.utem.inf.backend.services.AttendanceService;
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -14,20 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.utem.inf.backend.models.Attendance;
-import cl.utem.inf.backend.services.AttendanceService;
-
 @RestController
-@RequestMapping("/attendance")
+@RequestMapping("/v1/attendance")
 public class AttendanceController {
 
     @Autowired
     AttendanceService attendanceService;
 
-    @GetMapping("ping")
-    public String sayHello() {
-        return "pong";
-    }
 
     @GetMapping("/getAll")
     public List<Attendance> getAttendances() {
@@ -45,12 +39,7 @@ public class AttendanceController {
 
     @PostMapping("/add")
     public ResponseEntity<Attendance> addAttendance(@RequestBody Attendance attendance) {
-        try {
-            Attendance savedAttendance = attendanceService.addAttendance(attendance);
-            return new ResponseEntity<>(savedAttendance, HttpStatus.CREATED);
-        } catch (Exception e) {
-            // Manejo de la excepción
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Attendance savedAttendance = attendanceService.addAttendance(attendance);
+        return new ResponseEntity<>(savedAttendance, HttpStatus.CREATED);
     }
 }
