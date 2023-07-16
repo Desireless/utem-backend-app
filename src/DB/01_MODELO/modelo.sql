@@ -23,9 +23,10 @@ CREATE TABLE IF NOT EXISTS rooms (
     updated_at timestamptz NOT NULL DEFAULT NOW(),
     name varchar(255) NOT NULL,
     campus_id bigint NOT NULL,
-    device_sn varchar(255),
+    device_sn varchar(255) NOT NULL DEFAULT MD5(random()::text),
     CONSTRAINT room_campus_fkey FOREIGN KEY (campus_id) REFERENCES campus(id)
 );
+CREATE UNIQUE INDEX rms_devicesn_uidx ON rooms(UPPER(device_sn));
 INSERT INTO rooms (name, campus_id)
 VALUES
 ('LAB. INFORMATICA N 1', 1),

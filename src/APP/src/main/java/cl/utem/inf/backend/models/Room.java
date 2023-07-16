@@ -17,6 +17,9 @@ public class Room extends PkEntityBase {
     @JoinColumn(name = "campus_id", referencedColumnName = "id", nullable = false)
     private Campus campus = null;
 
+    @Column(name = "device_sn", nullable = false, unique = true)
+    private String deviceSn = null;
+
     // Constructor vacío (requerido por JPA)
     public Room() {
     }
@@ -41,5 +44,13 @@ public class Room extends PkEntityBase {
 
     public void setCampus(Campus campus) {
         this.campus = campus;
+    }
+
+    public String getDeviceSn() {
+        return deviceSn;
+    }
+
+    public void setDeviceSn(String deviceSn) {
+        this.deviceSn = deviceSn;
     }
 }

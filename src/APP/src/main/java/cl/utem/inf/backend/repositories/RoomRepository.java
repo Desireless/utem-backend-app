@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
+    public Room findByDeviceSnIgnoreCase(String deviceSn);
+
     public List<Room> findByCampus(Campus campus);
 
 }

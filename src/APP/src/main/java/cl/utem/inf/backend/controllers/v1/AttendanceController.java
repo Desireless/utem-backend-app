@@ -1,24 +1,27 @@
 package cl.utem.inf.backend.controllers.v1;
 
 import cl.utem.inf.backend.models.Attendance;
-import cl.utem.inf.backend.domains.AttendanceResponse;
 import cl.utem.inf.backend.domains.AttendanceVO;
+import cl.utem.inf.backend.domains.GeoVO;
 import cl.utem.inf.backend.exceptions.BadCredentialException;
 import cl.utem.inf.backend.exceptions.NotFoundException;
+import cl.utem.inf.backend.models.Room;
 import cl.utem.inf.backend.models.User;
 import cl.utem.inf.backend.services.AttendanceService;
+import cl.utem.inf.backend.services.RoomService;
 import cl.utem.inf.backend.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +38,9 @@ public class AttendanceController {
 
     @Autowired
     private AttendanceService attendanceService;
+
+    @Autowired
+    private RoomService roomService;
 
     @GetMapping(value = {"/all"},
             consumes = {MediaType.ALL_VALUE},
@@ -57,26 +63,38 @@ public class AttendanceController {
             vos.add(new AttendanceVO(a));
         }
         attendances.clear();
+        Collections.sort(vos, (AttendanceVO first, AttendanceVO second) -> first.getDate().compareTo(second.getDate()));
 
         return ResponseEntity.ok(vos);
     }
 
-    // en caso de no recibir correctamente los parametros retorna 400
-    @GetMapping("/user/{userId}/date/{date}")
-    public List<AttendanceResponse> getAttendancesByUserIdAndDate(HttpServletRequest request,
+    @PostMapping(value = {"{deviceSn}/request"},
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<AttendanceVO> addAttendance(HttpServletRequest request,
             @RequestHeader("Authorization") String authorization,
-            @PathVariable Integer userId,
-            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+            @PathVariable("deviceSn") String deviceSn,
+            @RequestBody GeoVO body) {
 
-        return attendanceService.getAttendancesByUserIdAndDate(userId, date);
+        final User authUser = userService.authUser(authorization);
+        if (authUser == null) {
+            throw new BadCredentialException("Usuario inválido");
+        }
+
+        final Room room = roomService.getRoom(deviceSn);
+        if (room == null) {
+            throw new NotFoundException(String.format("La sala (%s) no se encontró", deviceSn));
+        }
+
+        // @TODO: Validar la ubicación geográfica
+        Attendance attendance = new Attendance();
+        attendance.setLatitude(body.getLatitude());
+        attendance.setLongitude(body.getLongitude());
+        attendance.setUser(authUser);
+        attendance.setRoom(room);
+
+        Attendance savedAttendance = attendanceService.addAttendance(attendance);
+        AttendanceVO vo = new AttendanceVO(savedAttendance);
+        return ResponseEntity.ok(vo);
     }
-
-//    @PostMapping("/add")
-//    public ResponseEntity<Attendance> addAttendance(HttpServletRequest request,
-//            @RequestHeader("Authorization") String authorization,
-//            @RequestBody Attendance attendance) {
-//
-//        Attendance savedAttendance = attendanceService.addAttendance(attendance);
-//        return new ResponseEntity<>(savedAttendance, HttpStatus.CREATED);
-//    }
 }
