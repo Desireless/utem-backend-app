@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.utem.inf.backend.models.Attendance;
+import cl.utem.inf.backend.models.AttendanceResponse;
 import cl.utem.inf.backend.services.AttendanceService;
 
 @RestController
@@ -36,7 +37,7 @@ public class AttendanceController {
 
     // en caso de no recibir correctamente los parametros retorna 400
     @GetMapping("/user/{userId}/date/{date}")
-    public List<Attendance> getAttendancesByUserIdAndDate(
+    public List<AttendanceResponse> getAttendancesByUserIdAndDate(
             @PathVariable Integer userId,
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 
@@ -49,7 +50,6 @@ public class AttendanceController {
             Attendance savedAttendance = attendanceService.addAttendance(attendance);
             return new ResponseEntity<>(savedAttendance, HttpStatus.CREATED);
         } catch (Exception e) {
-            // Manejo de la excepción
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

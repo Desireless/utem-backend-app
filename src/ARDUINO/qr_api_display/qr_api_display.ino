@@ -6,9 +6,12 @@
 #include <Adafruit_SSD1306.h>	
 #include <WiFiNINA.h>
 
+
 #define ANCHO 128
 #define ALTO 64
 #define OLED_RESET -1
+
+char* SERIAL_NUMBER = "CCEEBC6B515438153202020FF131829";
 
 Adafruit_SSD1306 oled(ANCHO, ALTO, &Wire, OLED_RESET);
 QRCode qrcode;
@@ -22,14 +25,14 @@ void displayText(char* text, int time){
   oled.clearDisplay();
   oled.setTextColor(WHITE);
   oled.setTextSize(2);
-  oled.setCursor(0, 0);	
+  oled.setCursor(0, 0);
   oled.print(text); 
   oled.display(); 
   delay(time);
 }
 
 void startWifi(){
-  char ssid[] = "WifiHogar";
+  char ssid[] = "WifiHogarr";
   char pass[] = "112358juan";
   int intentos = 1;
 
@@ -38,8 +41,8 @@ void startWifi(){
     oled.setTextColor(WHITE);
     oled.setTextSize(2);
     oled.setCursor(0, 0);	
-    oled.print("Conectando"); 
-    oled.setCursor(15, 35);	
+    oled.print("CONECTANDO A LA RED "); 
+    oled.setCursor(45, 45);	
     oled.print(intentos);
     oled.display(); 
     delay(1000);
@@ -53,7 +56,7 @@ void printQR(char* text){
   uint8_t qrcodeData[qrcode_getBufferSize(3)];
   qrcode_initText(&qrcode, qrcodeData, 3, 0, text);
 
-  displayText("Generando QR..", 1000);
+  displayText("GENERANDO QR", 1000);
 
   oled.clearDisplay();
   for (uint8_t y = 0; y < qrcode.size; y++) {
@@ -103,12 +106,33 @@ char* getData(){
 
     return valueCopy;
   } else {
-    return strdup("Error al conectar con el servidor");
+    return strdup("error");
   }
 
 }
 
+void getSerialNumber(){
+  displayText(SERIAL_NUMBER, 5);
+}
 
+char* handleApi(){
+  int retryCount = 0;
+  char* result;
+
+  while(retryCount < 5){
+    result = getData();
+
+    if(strcmp(result, "error") != 0){
+      // Si la respuesta es correcta 
+      break;
+    }
+
+    retryCount++;
+    delay(2000);
+  }
+
+  
+}
 
 void setup(){
   Wire.begin();
@@ -116,12 +140,14 @@ void setup(){
 
   startWifi();
 
-  char* textToPrint = getData();
-  
-  printQR(textToPrint);
-  
-  free(textToPrint);
+  //char* textToPrint = getData();
+  //printQR(textToPrint);
+  //free(textToPrint);
+
+  getSerialNumber();
   
 }
 
-void loop(){}
+void loop(){
+
+}
