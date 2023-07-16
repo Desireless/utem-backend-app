@@ -2,46 +2,53 @@ package cl.utem.inf.backend.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "campus")
-public class Campus {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Campus extends PkEntityBase {
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    @Column(name = "faculty", nullable = false)
+    private String faculty = null;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime updatedAt;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "faculty_name", nullable = false)
-    private String facultyName;
+    @Column(name = "latitude", nullable = false)
+    private Double latitude = 0.0;
 
-    @Column(name = "campus_name", nullable = false)
-    private String campusName;
+    @Column(name = "longitude", nullable = false)
+    private Double longitude = 0.0;
 
-    @Column(name = "commune_name", nullable = false)
-    private String communeName;
-
-    // Constructor vacío (requerido por JPA)
-    public Campus() {
+    public String getFaculty() {
+        return faculty;
     }
 
-    // Constructor
-    public Campus(String facultyName, String campusName, String communeName) {
-        this.facultyName = facultyName;
-        this.campusName = campusName;
-        this.communeName = communeName;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -5,27 +5,28 @@ CREATE TABLE IF NOT EXISTS campus (
     id bigserial PRIMARY KEY,
     created_at timestamptz NOT NULL DEFAULT NOW(),
     updated_at timestamptz NOT NULL DEFAULT NOW(),
-    faculty_name varchar(255) NOT NULL,
-    campus_name varchar(255) NOT NULL,
-    commune_name varchar(255) NOT NULL
+    faculty varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
+    latitude double precision NOT NULL DEFAULT '0',
+    longitude double precision NOT NULL DEFAULT '0'
 );
-INSERT INTO campus (faculty_name, campus_name, commune_name)
-VALUES
-('Ingeniería', 'Campus Macul', 'Ñuñoa'),
-('Administración y Economía', 'Campus Providencia', 'Providencia');
+CREATE UNIQUE INDEX cmp_name_uidx ON campus(UPPER(name));
+INSERT INTO campus (faculty, name, latitude, longitude) VALUES
+('Ingeniería', 'Campus Macul', '-33.4661701','-70.6016703'),
+('Administración y Economía', 'Campus Providencia', '-33.4484591','-70.6623883');
 
 
-DROP TABLE IF EXISTS room CASCADE;
-CREATE TABLE IF NOT EXISTS room (
+DROP TABLE IF EXISTS rooms CASCADE;
+CREATE TABLE IF NOT EXISTS rooms (
     id bigserial PRIMARY KEY,
     created_at timestamptz NOT NULL DEFAULT NOW(),
     updated_at timestamptz NOT NULL DEFAULT NOW(),
-    room_name varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
     campus_id bigint NOT NULL,
     device_sn varchar(255),
     CONSTRAINT room_campus_fkey FOREIGN KEY (campus_id) REFERENCES campus(id)
 );
-INSERT INTO room (room_name, campus_id)
+INSERT INTO rooms (name, campus_id)
 VALUES
 ('LAB. INFORMATICA N 1', 1),
 ('LAB. INFORMATICA N 2', 1),
@@ -61,7 +62,7 @@ CREATE TABLE IF NOT EXISTS users (
     email varchar(255) NOT NULL,
     profile smallint NOT NULL
 );
-CREATE UNIQUE INDEX usr_email_uidx ON users(UPPER(email);
+CREATE UNIQUE INDEX usr_email_uidx ON users(UPPER(email));
 CREATE INDEX user_profile_idx ON users(profile);
 INSERT INTO users (email, profile) VALUES ('estudiante@utem.cl', '0');
 
@@ -73,13 +74,10 @@ CREATE TABLE IF NOT EXISTS attendance (
     updated_at timestamptz NOT NULL DEFAULT NOW(),
     room_id bigint NOT NULL,
     user_id bigint NOT NULL,
-    geolocation_address varchar(255),
-    longitude numeric,
-    latitude numeric,
-    CONSTRAINT attendance_room_fkey FOREIGN KEY (room_id) REFERENCES room(id),
+    longitude double precision,
+    latitude double precision,
+    CONSTRAINT attendance_room_fkey FOREIGN KEY (room_id) REFERENCES rooms(id),
     CONSTRAINT attendance_user_fkey FOREIGN KEY (user_id) REFERENCES users(id)
 );
-INSERT INTO attendance (room_id, user_id, geolocation_address, longitude, latitude)
-VALUES (1, 1, 'geolocalizacion', 123.456, 789.012);
 
 COMMIT;
