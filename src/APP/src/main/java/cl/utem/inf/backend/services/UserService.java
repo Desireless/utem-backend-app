@@ -19,19 +19,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio de usuario.
+ *
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
+ */
 @Service
 public class UserService {
 
+    /**
+     * Identificador de cliente de google.
+     */
     @Value("${google.client.id}")
     private String clientId;
 
+    /**
+     * Repositorio de usuario.
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Verificador de google id.
+     */
     private GoogleIdTokenVerifier verifier = null;
 
+    /**
+     * Logger de la clase.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
+    /**
+     * inicializa el servicio de GoogleIdtoken, evitando la creación de un nuevo objeto cada vez que se llama al servicio.
+     *
+     */
     @PostConstruct
     public void initService() {
         try {
@@ -44,6 +65,12 @@ public class UserService {
         }
     }
 
+
+    /**
+     * Recibe token de authorization y autentica al usuario.
+     *
+     * @return usuario.
+     */
     public User authUser(final String authorization) {
         User user = null;
         try {

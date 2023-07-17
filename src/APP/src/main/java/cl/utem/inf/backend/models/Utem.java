@@ -6,8 +6,9 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
+ * Clase encargada de la serialización de los objetos.
  *
- * @author jpbb
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Utem implements Serializable {

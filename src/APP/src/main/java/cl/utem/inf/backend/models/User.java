@@ -6,6 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
 
+/**
+ * Entidad que representa a un usuario UTEM
+ *
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
+ */
 @Entity
 @Table(name = "users")
 public class User extends PkEntityBase {
@@ -22,7 +27,9 @@ public class User extends PkEntityBase {
     @Column(name = "profile", nullable = false)
     private Profile profile = Profile.STUDENT;
 
-    // Constructor vacío (requerido por JPA)
+    /**
+     * Constructor de User por defecto
+     */
     public User() {
         this.email = "";
         this.profile = Profile.STUDENT;
@@ -30,7 +37,12 @@ public class User extends PkEntityBase {
         this.updatedAt = OffsetDateTime.now();
     }
 
-    // Constructor
+    /**
+     * Constructor de User 
+     *
+     * @param name Nombre de la sala
+     * @param campus id del Campus al que pertenece la sala
+     */
     public User(String email, Profile profile) {
         this.email = email;
         this.profile = profile;
@@ -38,6 +50,10 @@ public class User extends PkEntityBase {
         this.updatedAt = OffsetDateTime.now();
     }
 
+    /**
+     *
+     * @param email Correo electrónico del usuario UTEM
+     */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -50,10 +66,18 @@ public class User extends PkEntityBase {
         return email;
     }
 
+    /**
+     *
+     * @return Perfil del usuario UTEM
+     */
     public Profile getProfile() {
         return profile;
     }
 
+    /**
+     *
+     * @param profile Perfil del usuario UTEM
+     */
     public void setProfile(Profile profile) {
         this.profile = profile;
     }

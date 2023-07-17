@@ -4,7 +4,7 @@ package cl.utem.inf.backend.enums;
  * Esta enumeración permite identificar el Perfil que tiene un usuario dentro de
  * la aplicación.
  *
- * @author jpbb
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 public enum Profile {
     /**
@@ -35,5 +35,10 @@ public enum Profile {
         }
     };
     
+    /**
+     * Obtiene el nombre del perfil.
+     * 
+     * @return Nombre del perfil.
+     */
     public abstract String getName();
 }

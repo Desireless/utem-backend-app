@@ -26,6 +26,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador que maneja las asistencias de la API.
+ *
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
+ */
 @RestController
 @RequestMapping(value = {"/v1/attendance"},
         consumes = {MediaType.APPLICATION_JSON_VALUE},
@@ -33,15 +38,30 @@ import org.springframework.web.bind.annotation.RestController;
 )
 public class AttendanceController {
 
+    /**
+     * Servicio de usuario
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * Servicio de asistencia
+     */
     @Autowired
     private AttendanceService attendanceService;
 
+    /**
+     * Servicio de sala
+     */
     @Autowired
     private RoomService roomService;
 
+    /**
+     * Obtiene todas las asistencias de un usuario
+     * @param request Petición HTTP
+     * @param authorization Token de autorización
+     * @return Lista de asistencias
+     */
     @GetMapping(value = {"/all"},
             consumes = {MediaType.ALL_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -68,6 +88,13 @@ public class AttendanceController {
         return ResponseEntity.ok(vos);
     }
 
+    /**
+     * Obtiene la sala del dispositivo
+     * @param request Petición HTTP
+     * @param authorization Token de autorización
+     * @param deviceSn Número de serie del dispositivo
+     * @return Lista de asistencias
+     */
     @PostMapping(value = {"{deviceSn}/request"},
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

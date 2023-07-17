@@ -10,17 +10,31 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
+ * Repositorio de la entidad Attendance
  *
  * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
 
-    // el new genera la instancia para poder hacer uso de AttendanceResponse y hacer el JOIN con Room
+    /**
+     * Busca asistencia por usuario y fecha de creación
+     *
+     * @param userId id de usuario
+     * @param startDateTime fecha de inicio
+     * @param endDateTime fecha de termino
+     * @return asistencia encontrada
+     */
     @Query("SELECT new cl.utem.inf.backend.domains.AttendanceResponse(a) FROM Attendance a "
             + "WHERE a.user.id = :userId AND a.createdAt BETWEEN :startDateTime AND :endDateTime")
     public List<AttendanceResponse> searchByUserIdAndCreatedAtBetween(Integer userId, OffsetDateTime startDateTime, OffsetDateTime endDateTime);
 
+    /**
+     * Busca asistencia por usuario
+     *
+     * @param user usuario
+     * @return asistencia encontrada
+     */
     public List<Attendance> findByUser(User user);
 
 }

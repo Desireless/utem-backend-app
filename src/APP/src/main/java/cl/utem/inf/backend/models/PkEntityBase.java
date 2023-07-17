@@ -11,9 +11,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * Clase base de entidades con ID autoincrementable.
+ * Clase base de entidades con ID autoincrementable, fecha de creación y fecha de actualiazción.
  *
- * @author Juan Pablo
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 @MappedSuperclass
 public class PkEntityBase extends Utem {

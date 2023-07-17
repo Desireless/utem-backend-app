@@ -13,24 +13,52 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Servicio de usuario.
+ *
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
+ */
 @Service
 public class AttendanceService {
 
+    /**
+     * Repositorio de asistencia.
+     */
     @Autowired
     private AttendanceRepository attendanceRepository;
 
-    public AttendanceService() {
+    /**
+     * Constructor.
+     */
+    public AttendanceService() {}
 
-    }
-
+    /**
+     * Devuelve las asistencias de un usuario.
+     *
+     * @param user usuario
+     * @return asistencias del usuario
+     */
     public List<Attendance> getAttendances(final User user) {
         return attendanceRepository.findByUser(user);
     }
 
+    /**
+     * agrega una asistencia al sistema.
+     *
+     * @param attendance objeto asistencia
+     * @return asistencias del usuario
+     */
     public Attendance addAttendance(Attendance attendance) {
         return attendanceRepository.save(attendance);
     }
 
+    /**
+     * Devuelve las asistencias de un usuario en una fecha.
+     *
+     * @param userId identificador del usuario
+     * @param date fecha
+     * @return asistencias del usuario por fecha
+     */
     public List<AttendanceResponse> getAttendancesByUserIdAndDate(Integer userId, LocalDate date) {
         final ZoneOffset zo = ZoneOffset.of(ZoneId.systemDefault().getId());
         OffsetDateTime startDateTime = date.atStartOfDay().atOffset(zo);

@@ -11,16 +11,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
+ * Controlador que maneja las excepciones de la API.
  *
- * @author jpbb
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
+    /**
+     * Logger de la clase
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(ApiExceptionHandler.class);
 
     /**
-     *
+     * 
      * @param e Excepción inesperada
      * @return Un error 401 con la excepción generada
      */

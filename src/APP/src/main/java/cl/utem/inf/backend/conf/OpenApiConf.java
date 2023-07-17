@@ -8,8 +8,9 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * Configuración de OpenAPI.
  *
- * @author jpbb
+ * @author Juan Pablo Bastías Barahona <mainjpbb@gmail.com>
  */
 @Configuration
 @OpenAPIDefinition(
