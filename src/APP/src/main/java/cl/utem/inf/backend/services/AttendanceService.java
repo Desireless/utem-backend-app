@@ -1,7 +1,7 @@
 package cl.utem.inf.backend.services;
 
-import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.domains.AttendanceResponse;
+import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.models.User;
 import cl.utem.inf.backend.repositories.AttendanceRepository;
 import java.time.LocalDate;
@@ -30,7 +30,8 @@ public class AttendanceService {
     /**
      * Constructor.
      */
-    public AttendanceService() {}
+    public AttendanceService() {
+    }
 
     /**
      * Devuelve las asistencias de un usuario.

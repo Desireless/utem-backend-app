@@ -1,4 +1,5 @@
 package cl.utem.inf.backend.domains;
+
 import cl.utem.inf.backend.models.Attendance;
 
 /**
@@ -36,6 +37,7 @@ public class AttendanceResponse {
 
     /**
      * obtiene asistencia
+     *
      * @return attendance
      */
     public Attendance getAttendance() {
@@ -44,6 +46,7 @@ public class AttendanceResponse {
 
     /**
      * obtiene nombre de sala
+     *
      * @return nombre de la sala
      */
     public String getRoomName() {
@@ -52,6 +55,7 @@ public class AttendanceResponse {
 
     /**
      * asigna nombre de la sala
+     *
      * @param roomName nombre de la sala
      */
     public void setRoomName(String roomName) {

@@ -38,7 +38,7 @@ public class User extends PkEntityBase {
     }
 
     /**
-     * Constructor de User 
+     * Constructor de User
      *
      * @param name Nombre de la sala
      * @param campus id del Campus al que pertenece la sala

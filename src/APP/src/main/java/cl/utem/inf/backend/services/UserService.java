@@ -10,7 +10,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import jakarta.annotation.PostConstruct;
 import java.util.Collections;
-import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
@@ -50,7 +49,8 @@ public class UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     /**
-     * inicializa el servicio de GoogleIdtoken, evitando la creación de un nuevo objeto cada vez que se llama al servicio.
+     * inicializa el servicio de GoogleIdtoken, evitando la creación de un nuevo
+     * objeto cada vez que se llama al servicio.
      *
      */
     @PostConstruct
@@ -64,7 +64,6 @@ public class UserService {
             LOGGER.debug("Error al iniciar el verificador de google: {}", e.getMessage(), e);
         }
     }
-
 
     /**
      * Recibe token de authorization y autentica al usuario.

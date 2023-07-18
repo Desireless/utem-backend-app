@@ -60,6 +60,7 @@ public class AttendanceVO extends Utem {
 
     /**
      * sala del registro de asistencia
+     *
      * @return sala
      */
     public String getRoom() {
@@ -68,6 +69,7 @@ public class AttendanceVO extends Utem {
 
     /**
      * correo que registra la asistencia
+     *
      * @return correo
      */
     public String getEmail() {
@@ -76,6 +78,7 @@ public class AttendanceVO extends Utem {
 
     /**
      * fecha de la asistencia
+     *
      * @return fecha
      */
     public OffsetDateTime getDate() {

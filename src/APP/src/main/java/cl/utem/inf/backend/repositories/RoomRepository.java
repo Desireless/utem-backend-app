@@ -16,6 +16,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     /**
      * Busca sala por numero serial de dispositivo
+     *
      * @param deviceSn numero serial
      * @return sala encontrada
      */
@@ -23,6 +24,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     /**
      * Busca sala por campus
+     *
      * @param campus campus id
      * @return sala encontrada
      */

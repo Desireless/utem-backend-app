@@ -22,7 +22,7 @@
         <commons.collections4.version>4.4</commons.collections4.version>
         <google.api.version>2.2.0</google.api.version>
         <commons.validator.version>1.7</commons.validator.version>
-         <springdoc.version>2.1.0</springdoc.version>
+        <springdoc.version>2.1.0</springdoc.version>
     </properties>
 
     <dependencies>

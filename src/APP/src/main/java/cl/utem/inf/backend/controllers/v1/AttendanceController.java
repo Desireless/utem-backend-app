@@ -1,10 +1,10 @@
 package cl.utem.inf.backend.controllers.v1;
 
-import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.domains.AttendanceVO;
 import cl.utem.inf.backend.domains.GeoVO;
 import cl.utem.inf.backend.exceptions.BadCredentialException;
 import cl.utem.inf.backend.exceptions.NotFoundException;
+import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.models.Room;
 import cl.utem.inf.backend.models.User;
 import cl.utem.inf.backend.services.AttendanceService;
@@ -58,6 +58,7 @@ public class AttendanceController {
 
     /**
      * Obtiene todas las asistencias de un usuario
+     *
      * @param request Petición HTTP
      * @param authorization Token de autorización
      * @return Lista de asistencias
@@ -90,6 +91,7 @@ public class AttendanceController {
 
     /**
      * Obtiene la sala del dispositivo
+     *
      * @param request Petición HTTP
      * @param authorization Token de autorización
      * @param deviceSn Número de serie del dispositivo

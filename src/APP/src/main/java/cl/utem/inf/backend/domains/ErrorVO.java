@@ -49,6 +49,7 @@ public class ErrorVO extends Utem {
 
     /**
      * obtiene el estado
+     *
      * @return ok
      */
     public boolean isOk() {
@@ -57,6 +58,7 @@ public class ErrorVO extends Utem {
 
     /**
      * obtiene el mensaje de error
+     *
      * @return message
      */
     public String getMessage() {
@@ -65,6 +67,7 @@ public class ErrorVO extends Utem {
 
     /**
      * obtiene la fecha de creación
+     *
      * @return created
      */
     public OffsetDateTime getCreated() {

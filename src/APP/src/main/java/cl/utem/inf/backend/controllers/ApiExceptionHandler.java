@@ -24,7 +24,7 @@ public class ApiExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApiExceptionHandler.class);
 
     /**
-     * 
+     *
      * @param e Excepción inesperada
      * @return Un error 401 con la excepción generada
      */

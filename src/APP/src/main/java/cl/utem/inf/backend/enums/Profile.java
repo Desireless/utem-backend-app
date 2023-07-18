@@ -15,7 +15,7 @@ public enum Profile {
         public String getName() {
             return "EStudiante";
         }
-    }, 
+    },
     /**
      * 1 - Perfile académico
      */
@@ -24,7 +24,7 @@ public enum Profile {
         public String getName() {
             return "Académico";
         }
-    }, 
+    },
     /**
      * 2 - Funcionario
      */
@@ -34,10 +34,10 @@ public enum Profile {
             return "Funcionario";
         }
     };
-    
+
     /**
      * Obtiene el nombre del perfil.
-     * 
+     *
      * @return Nombre del perfil.
      */
     public abstract String getName();

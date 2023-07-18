@@ -1,7 +1,7 @@
 package cl.utem.inf.backend.repositories;
 
-import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.domains.AttendanceResponse;
+import cl.utem.inf.backend.models.Attendance;
 import cl.utem.inf.backend.models.User;
 import java.time.OffsetDateTime;
 import java.util.List;
