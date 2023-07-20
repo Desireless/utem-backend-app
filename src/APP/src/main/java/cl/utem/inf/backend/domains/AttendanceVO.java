@@ -35,7 +35,8 @@ public class AttendanceVO extends Utem {
     /**
      * fecha de la asistencia
      */
-    @Schema(description = "Fecha de la asistencia")
+    @Schema(description = "Fecha de la asistencia",
+            example = "2020-05-20T13:12:18.825Z")
     private OffsetDateTime date = null;
 
     /**

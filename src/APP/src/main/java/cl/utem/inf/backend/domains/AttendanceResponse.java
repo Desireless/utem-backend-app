@@ -1,6 +1,7 @@
 package cl.utem.inf.backend.domains;
 
 import cl.utem.inf.backend.models.Attendance;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Respuesta personalizada para la asistencia.
@@ -12,11 +13,16 @@ public class AttendanceResponse {
     /**
      * Objeto Asistencia
      */
+    @Schema(description = "Representa los datos de la asistencia",
+            requiredMode = Schema.RequiredMode.REQUIRED)
     private Attendance attendance;
 
     /**
      * Nombre de la sala
      */
+    @Schema(description = "Representa el nombre de la sala de clases",
+            requiredMode = Schema.RequiredMode.REQUIRED,
+            example = "LAB. INFORMATICA N 1")
     private String roomName;
 
     /**

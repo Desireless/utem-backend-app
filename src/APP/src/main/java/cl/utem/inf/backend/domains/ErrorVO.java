@@ -1,8 +1,11 @@
 package cl.utem.inf.backend.domains;
 
-import cl.utem.inf.backend.models.Utem;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.OffsetDateTime;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import cl.utem.inf.backend.models.Utem;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Value Object que representa los errores.
@@ -15,16 +18,23 @@ public class ErrorVO extends Utem {
     /**
      * Indica si existe un error
      */
+    @Schema(description = "Indica si existe un error",
+            example = "true")
     private boolean ok = false;
 
     /**
      * Mensaje de error
      */
+    @Schema(description = "Representa el mensaje de error",
+            requiredMode = Schema.RequiredMode.REQUIRED,
+            example = "Error al realizar la operación")
     private String message = null;
 
     /**
      * Fecha de creación
      */
+    @Schema(description = "Representa la fecha de creación",
+            example = "2020-05-20T13:12:18.825Z")
     private OffsetDateTime created = OffsetDateTime.now();
 
     /**
