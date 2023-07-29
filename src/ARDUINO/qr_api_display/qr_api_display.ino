@@ -32,7 +32,7 @@ void displayText(char* text, int time){
 }
 
 void startWifi(){
-  char ssid[] = "WifiHogarr";
+  char ssid[] = "WifiHogar";
   char pass[] = "112358juan";
   int intentos = 1;
 
@@ -140,11 +140,11 @@ void setup(){
 
   startWifi();
 
-  //char* textToPrint = getData();
-  //printQR(textToPrint);
-  //free(textToPrint);
+  char* textToPrint = getData();
+  printQR(textToPrint);
+  free(textToPrint);
 
-  getSerialNumber();
+  //getSerialNumber();
   
 }
 

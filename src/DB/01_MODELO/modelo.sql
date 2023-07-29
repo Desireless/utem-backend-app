@@ -55,6 +55,10 @@ VALUES
 ('M3-305', 1),
 ('M3-306', 1);
 
+INSERT INTO rooms (name, campus_id, device_sn)
+VALUES
+('LAB. INFORMATICA N 8', 1, 'CCEEBC6B515438153202020FF131829');
+
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE IF NOT EXISTS users (
     id bigserial PRIMARY KEY,
@@ -65,7 +69,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 CREATE UNIQUE INDEX usr_email_uidx ON users(UPPER(email));
 CREATE INDEX user_profile_idx ON users(profile);
-INSERT INTO users (email, profile) VALUES ('estudiante@utem.cl', '0');
+INSERT INTO users (email, profile) VALUES ('jbastias@utem.cl', '0');
 
 
 DROP TABLE IF EXISTS attendance CASCADE;
@@ -80,5 +84,7 @@ CREATE TABLE IF NOT EXISTS attendance (
     CONSTRAINT attendance_room_fkey FOREIGN KEY (room_id) REFERENCES rooms(id),
     CONSTRAINT attendance_user_fkey FOREIGN KEY (user_id) REFERENCES users(id)
 );
+INSERT INTO attendance (room_id, user_id, longitude, latitude)
+VALUES (8, 1, -33.4662, -70.5971);
 
 COMMIT;
