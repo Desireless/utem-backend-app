@@ -9,6 +9,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import jakarta.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.Collections;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -60,7 +61,8 @@ public class UserService {
             LOGGER.debug("Google Client ID: {}", googleClientId);
 
             this.verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
-                    .setAudience(Collections.singletonList(googleClientId))
+                    .setAudience(Arrays.asList(googleClientId))
+                    .setIssuer("https://accounts.google.com")
                     .build();
         } catch (Exception e) {
             LOGGER.error("Error al iniciar el verificador de google: {}", e.getLocalizedMessage());
