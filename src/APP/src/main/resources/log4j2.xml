@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="path.logs">${sys:java.io.tmpdir}</Property>
+    </Properties>
+    
+    <Appenders>
+        <!-- Archivo principal -->
+        <RollingFile name="ROOT_JPBB" 
+                     fileName="${sys:path.logs}${sys:file.separator}utem${sys:file.separator}jpbb${sys:file.separator}app.log" 
+                     filePattern="${sys:path.logs}${sys:file.separator}utem${sys:file.separator}jpbb${sys:file.separator}app.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%tid] [%c{1}] %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+
+        <!-- DEBUG -->
+        <RollingFile name="DEBUG_JPBB" 
+                     fileName="${sys:path.logs}${sys:file.separator}utem${sys:file.separator}jpbb${sys:file.separator}debug.log" 
+                     filePattern="${sys:path.logs}${sys:file.separator}utem${sys:file.separator}jpbb${sys:file.separator}debug.log.%d{yyyyMMdd}.gz" 
+                     append="true">
+            <ThresholdFilter level="DEBUG" />
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] [%tid] [%c{1}] %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="31"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="cl.utem.inf" level="debug">
+            <AppenderRef ref="DEBUG_JPBB" level="debug" />
+        </Logger>
+
+        <Logger name="com.zaxxer.hikari" level="trace">
+            <AppenderRef ref="ROOT_JPBB" />
+        </Logger>
+        
+        <Logger name="com.zaxxer.hikari.HikariConfig" level="debug">
+            <AppenderRef ref="ROOT_JPBB" />
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="ROOT_JPBB" level="error" />
+        </Root>
+    </Loggers>
+</Configuration>
