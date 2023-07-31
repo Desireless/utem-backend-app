@@ -1,11 +1,9 @@
 package cl.utem.inf.backend.domains;
 
-import java.time.OffsetDateTime;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import cl.utem.inf.backend.models.Utem;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.OffsetDateTime;
 
 /**
  * Value Object que representa los errores.
