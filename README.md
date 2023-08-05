@@ -1,14 +1,12 @@
-# Proyecto de titulo
+# Repositorio Backend
 
-Desarrollo del sistema automatizado de control de asistencia en salas de clases en la UTEM.
-
+Este repositorio es parte del trabajo de título "Sistema automatizado de control de asistencia en salas de clases"
 
 ## Descripción
 
-Este proyecto consiste en una solución completa para el registro automático de asistencia a clases, que contempla los siguientes desarrollos:
+Este repositorio contiene las siguientes tecnologías:
 
-- Applicación móvil.
-- Dispositivo electrónico Arduino.
-- Backend.
+- Backend como API REST. Escrito en Java.
+- Arduino. Escrito en C++.
+- Scripts de la base de datos PostgreSQL.
 
-## Vista previa (WIP)
