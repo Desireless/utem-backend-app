@@ -1,14 +1,20 @@
-# Proyecto de titulo
+# Repositorio
 
-Desarrollo del sistema automatizado de control de asistencia en salas de clases en la UTEM.
-
+Este repositorio es parte del trabajo de título sistema automatizado de control de asistencia en salas de clases.
 
 ## Descripción
 
-Este proyecto consiste en una solución completa para el registro automático de asistencia a clases, que contempla los siguientes desarrollos:
+Este trabajo consiste en una solución que automatiza el registro de asistencia a clases de la Universidad Tecnológica Metropolitana implementando un prototipo funcional.
 
-- Applicación móvil.
-- Dispositivo electrónico Arduino.
+El sistema desarrollado consta de los siguientes componentes:
+
+- Applicación móvil ([Enlace al repositorio](https://github.com/Desireless/utem-mobile-app)).
+- Dispositivo Arduino.
 - Backend.
 
-## Vista previa (WIP)
+
+## Vista previa
+
+![Mockup app 1](/src/DOCS/ASSETS/mockup_1.png)
+![Mockup app 2](/src/DOCS/ASSETS/mockup_2.png)
+![Arduino mostrando código QR](/src/DOCS/ASSETS/arduino_qr.jpg)
