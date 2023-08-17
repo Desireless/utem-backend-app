@@ -56,8 +56,11 @@ public class UserService {
     @PostConstruct
     public void initService() {
         try {
-            this.verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(),
-                    new GsonFactory()).setAudience(Collections.singletonList(clientId))
+            final String googleClientId = StringUtils.trimToEmpty(clientId);
+            LOGGER.debug("Google Client ID: {}", googleClientId);
+
+            this.verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new GsonFactory())
+                    .setAudience(Collections.singletonList(googleClientId))
                     .build();
         } catch (Exception e) {
             LOGGER.error("Error al iniciar el verificador de google: {}", e.getLocalizedMessage());
@@ -68,6 +71,7 @@ public class UserService {
     /**
      * Recibe token de authorization y autentica al usuario.
      *
+     * @param authorization Cabecera de autenticación JWT
      * @return usuario.
      */
     public User authUser(final String authorization) {
@@ -77,6 +81,7 @@ public class UserService {
                 final String jwt = StringUtils.trimToEmpty(StringUtils.removeStartIgnoreCase(authorization, "bearer"));
                 final GoogleIdToken google = verifier.verify(jwt);
                 if (google == null) {
+                    LOGGER.debug("No fue posible decodificar el JWT ({})", jwt);
                     throw new BadCredentialException("NO se pudo decodificar los datos de google");
                 }
 
